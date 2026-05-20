@@ -1,12 +1,15 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, inject, viewChild } from '@angular/core';
 import { data } from './data';
-import { Data } from '../../../types/grid';
+import { Data } from '../../models/data.model';
 import { FiltersService } from '../../shared/definefilters';
 import { WebixGridService } from '../../shared/webix-grid';
 import { GridAdjustService } from '../../shared/adjust-grid';
 import { SystemClickService } from '../../shared/system-click';
-import type { WebixDatatableColumn, WebixSortConfig, WebixSparklineOptions } from 'webix';
 import * as webix from 'webix-grid-gpl';
+
+interface SparklineConfig extends webix.WebixSparklineOptions {
+  type: string;
+}
 
 @Component({
   selector: 'grid-view',
@@ -66,7 +69,7 @@ export class GridView implements AfterViewInit, OnDestroy {
   }
 
   private applyInitialSorting(): void {
-    const sortConfig: WebixSortConfig[] = [
+    const sortConfig: webix.WebixSortConfig[] = [
       { by: 'room_type', dir: 'asc' },
       { by: 'target_temperature', dir: 'desc' },
     ];
@@ -76,7 +79,7 @@ export class GridView implements AfterViewInit, OnDestroy {
     this.gridService.markSorting('target_temperature', 'desc', true);
   }
 
-  private getColumns(): WebixDatatableColumn[] {
+  private getColumns(): webix.WebixDatatableColumn[] {
     return [
       {
         id: 'name',
@@ -137,7 +140,7 @@ export class GridView implements AfterViewInit, OnDestroy {
           const template = webix.Sparklines.getTemplate({
             type: 'line',
             color,
-          });
+          } as SparklineConfig);
           return template(...args);
         },
         tooltip: function (_obj: unknown, _common: unknown, value: unknown) {
