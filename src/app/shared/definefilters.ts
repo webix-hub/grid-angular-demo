@@ -13,6 +13,8 @@ export class FiltersService {
       startTime: number;
       node: HTMLElement | null;
       update(master: webix.ui.baseview): void;
+      getValue(node: HTMLElement): unknown;
+      setValue(node: HTMLElement, value: any): unknown;
       render(): string;
       refresh(master: webix.ui.baseview, node: HTMLElement): void;
     } = {
@@ -35,6 +37,12 @@ export class FiltersService {
           System running: ${h}:${m}:${s},
           <span class="text-green">0 issues detected</span>
         `;
+      },
+      getValue(node: HTMLElement): any {
+        return null;
+      },
+      setValue(node: HTMLElement, value: any): any {
+        return null;
       },
     };
 

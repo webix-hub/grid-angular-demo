@@ -25,6 +25,10 @@ export class SystemClickService {
   }
 
   private getSystemStatusFilter() {
-    return webix.ui.datafilter['systemStatus'] as webix.ui.WebixFilter | undefined;
+    return webix.ui.datafilter['systemStatus'] as
+      | (webix.ui.WebixFilter & {
+          update(master?: webix.ui.baseview): void;
+        })
+      | undefined;
   }
 }

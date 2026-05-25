@@ -1,5 +1,5 @@
 // Demo data
-import { Data } from '../../../types/grid';
+import { Data } from "../../models/data.model";
 
 export const data: Data[] = [
   {
